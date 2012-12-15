@@ -1,0 +1,377 @@
+subprojects {
+
+    apply plugin: 'java'
+
+    apply plugin: 'maven'
+
+    apply plugin: 'eclipse'
+
+    
+
+    group = "net.pet"
+
+    version = "1.2-SNAPSHOT"
+
+
+
+    [compileJava, compileTestJava]*.options*.encoding = 'UTF-8'
+
+    
+
+    repositories {
+
+        maven {
+            credentials {
+               username 'admin'
+               password 'admin123'
+            }
+            url "http://192.168.1.125:8081/nexus/content/groups/public/"
+        }
+
+        mavenLocal()
+
+        mavenCentral()
+
+    }
+
+
+
+   task libs(type: Sync) {
+    from configurations.runtime
+    into "$buildDir/libs"
+  }
+  
+
+ 
+
+
+
+    uploadArchives { 
+       repositories.mavenDeployer {
+          name = 'pet' // optional
+          repository(url: "http://192.168.1.125:8081/nexus/content/repositories/snapshots") {
+             authentication(userName: "admin", password: "admin123")
+          }
+          
+        }
+    
+        repositories {
+        flatDir {
+           dirs 'repos'
+        } }    
+   }
+
+    dependencies {
+
+    }
+
+
+
+    jar {
+
+        manifest.attributes "Implementation-Title": "paoding-rose", "Implementation-Version": version
+
+    }
+
+}
+
+
+
+project(':rose') {
+
+    dependencies {
+
+        compile project(':rose-context')
+
+           testCompile "junit:junit:4.7"
+
+           compile "javax.servlet:servlet-api:2.4"
+
+           compile "commons-logging:commons-logging:1.1.1"
+
+           compile "commons-lang:commons-lang:2.6"
+
+           compile "commons-collections:commons-collections:3.2.1"
+
+           compile "org.springframework:spring-context:3.1.2.RELEASE"
+
+           compile "org.springframework:spring-web:3.1.2.RELEASE"
+
+           compile "log4j:log4j:1.2.17"
+
+           compile "javax.servlet:jsp-api:2.0"
+
+           compile "commons-fileupload:commons-fileupload:1.2.2"
+
+           compile "org.springframework:spring-webmvc:3.1.2.RELEASE"
+
+           testCompile "org.springframework:spring-mock:2.0.8"
+
+           compile "org.apache.velocity:velocity:1.7"
+
+           compile "org.apache.velocity:velocity-tools:2.0"
+
+
+
+    }
+
+}
+
+
+
+project(':rose-context') {
+
+    dependencies {
+
+        testCompile "junit:junit:4.7"
+
+        compile "javax.servlet:servlet-api:2.4"
+
+        compile "commons-logging:commons-logging:1.1.1"
+
+        compile "commons-lang:commons-lang:2.6"
+
+        compile "commons-collections:commons-collections:3.2.1"
+
+        compile "org.springframework:spring-context:3.1.2.RELEASE"
+
+        compile "org.springframework:spring-web:3.1.2.RELEASE"
+
+    }
+
+}
+
+
+
+project(':rose-jade') {
+
+    dependencies {
+
+        compile project(':rose-context')
+
+        testCompile "junit:junit:4.7"
+
+        compile "javax.servlet:servlet-api:2.4"
+
+        compile "commons-logging:commons-logging:1.1.1"
+
+        compile "commons-lang:commons-lang:2.6"
+
+        compile "commons-jexl:commons-jexl:1.1"
+
+        compile "commons-collections:commons-collections:3.2.1"
+
+        compile "org.springframework:spring-context:3.1.2.RELEASE"
+
+        compile "org.springframework:spring-jdbc:3.1.2.RELEASE"
+
+        testCompile "org.hsqldb:hsqldb:2.2.8"
+
+    }
+
+}
+
+
+
+project(':rose-pipe') {
+
+    dependencies {
+
+        compile project(':rose')
+
+        testCompile "junit:junit:4.7"
+
+        compile "javax.servlet:servlet-api:2.4"
+
+        compile "javax.servlet:jsp-api:2.0"
+
+        compile "com.metaparadigm:json-rpc:1.0"
+
+    }
+
+}
+
+
+
+
+
+project(':pet-core') {
+    dependencies {
+
+       compile project(':rose-context')
+
+       compile project(':rose')
+
+       compile project(':rose-jade')
+
+       compile "com.alibaba:fastjson:1.1.25"
+
+       compile "c3p0:c3p0:0.9.1.2"
+
+       compile "commons-httpclient:commons-httpclient:3.1"
+       
+       compile "org.springframework.data:spring-data-mongodb:1.1.1.RELEASE"
+
+       compile "mysql:mysql-connector-java:5.1.16"
+
+       testCompile "junit:junit:4.7"
+
+    }
+
+}
+
+
+
+
+
+
+
+
+
+
+
+project(':pet-fetch') {
+
+      dependencies {
+
+        compile project(':pet-core')
+
+        compile "com.taobao:api:1.0"
+
+        testCompile "junit:junit:4.7"
+
+      }
+
+}
+
+
+
+
+
+
+
+project(':redis-pool') {
+
+   dependencies {
+
+        compile "redis.clients:jedis:2.1.0"
+
+        compile "commons-collections:commons-collections:3.2.1"
+
+
+
+        compile "commons-lang:commons-lang:2.6"
+
+
+
+        compile "org.apache.zookeeper:zookeeper:3.4.1"
+
+
+
+        compile "commons-pool:commons-pool:1.5.4"
+
+
+
+        compile "log4j:log4j:1.2.16"
+
+   }
+
+}
+
+
+
+
+
+
+
+
+
+
+
+project(':pet-web') {
+
+     dependencies {
+
+       compile project(':rose')
+
+       compile project(':rose-context')
+
+       compile project(':rose-jade')
+
+       compile "sslext:sslext:1.10-4"
+ 
+   }
+
+}
+
+
+
+
+
+project(':pet-search') {
+    dependencies {
+
+       compile project(':pet-core')
+
+       compile("org.apache.mahout:mahout-distribution:0.7"){
+           exclude module: 'bson'
+       }
+       
+        compile("org.apache.mahout:mahout-core:0.7"){
+           exclude module: 'bson'
+       }
+       
+       compile "org.mongodb:bson:2.9.3"
+       
+//       compile "org.apache.hadoop:hadoop-core:1.1.0"
+
+//       compile "org.apache.solr:solr-core:4.0.0"
+//
+//       compile "org.apache.lucene:lucene-core:4.0.0"
+//       
+//       compile "org.apache.lucene:lucene-queryparser:4.0.0"
+//       
+//       compile "org.apache.lucene:lucene-analyzers:4.0.0"
+//       
+//       compile "org.apache.lucene:lucene-demo:4.0.0"
+
+       compile "com.google.protobuf:protobuf-java:2.4.1"
+
+       compile "sslext:sslext:1.10-4"
+       
+       compile "com.linkedin.zoie:zoie-core:3.3.0"
+       
+       compile "com.pet:mmseg4j:1.9.0"
+       
+       compile "org.apache.thrift:libthrift:0.9.0"
+
+     }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
