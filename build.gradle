@@ -211,6 +211,10 @@ project(':pet-core') {
        compile "commons-httpclient:commons-httpclient:3.1"
        
        compile "org.springframework.data:spring-data-mongodb:1.1.1.RELEASE"
+       
+       compile "org.apache.zookeeper:zookeeper:3.4.5"
+       
+       compile "com.github.sgroschupf:zkclient:0.1"
 
        compile "mysql:mysql-connector-java:5.1.16"
 
@@ -237,6 +241,8 @@ project(':pet-fetch') {
         compile project(':pet-core')
 
         compile "com.taobao:api:1.0"
+        
+        compile "com.alibaba:dubbo:2.5.3"
 
         testCompile "junit:junit:4.7"
 
@@ -258,20 +264,10 @@ project(':redis-pool') {
 
         compile "commons-collections:commons-collections:3.2.1"
 
-
-
         compile "commons-lang:commons-lang:2.6"
 
-
-
-        compile "org.apache.zookeeper:zookeeper:3.4.1"
-
-
-
         compile "commons-pool:commons-pool:1.5.4"
-
-
-
+        
         compile "log4j:log4j:1.2.16"
 
    }
@@ -311,42 +307,45 @@ project(':pet-web') {
 project(':pet-search') {
     dependencies {
 
-       compile project(':pet-core')
-
-       compile("org.apache.mahout:mahout-distribution:0.7"){
-           exclude module: 'bson'
-       }
-       
-        compile("org.apache.mahout:mahout-core:0.7"){
-           exclude module: 'bson'
-       }
+       compile project(':pet-search-core')
        
        compile "org.mongodb:bson:2.9.3"
-       
-//       compile "org.apache.hadoop:hadoop-core:1.1.0"
-
-//       compile "org.apache.solr:solr-core:4.0.0"
-//
-//       compile "org.apache.lucene:lucene-core:4.0.0"
-//       
-//       compile "org.apache.lucene:lucene-queryparser:4.0.0"
-//       
-//       compile "org.apache.lucene:lucene-analyzers:4.0.0"
-//       
-//       compile "org.apache.lucene:lucene-demo:4.0.0"
 
        compile "com.google.protobuf:protobuf-java:2.4.1"
 
        compile "sslext:sslext:1.10-4"
-       
+
        compile "com.linkedin.zoie:zoie-core:3.3.0"
        
-       compile "com.pet:mmseg4j:1.9.0"
-       
+       compile "com.pet:mmseg4j:1.8.5"
+    
        compile "org.apache.thrift:libthrift:0.9.0"
 
      }
 }
+
+
+project(':pet-search-core') {
+    dependencies {
+
+       compile project(':pet-core')
+
+       compile "com.google.protobuf:protobuf-java:2.4.1"
+       
+       compile ("com.alibaba:dubbo:2.5.3"){
+          exclude module: 'spring'
+       }
+   
+
+     }
+}
+
+project(':pet-search-client') {
+    dependencies {
+       compile project(':pet-search-core')
+     }
+}
+
 
 
 

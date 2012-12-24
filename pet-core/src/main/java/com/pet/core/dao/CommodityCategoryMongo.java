@@ -17,16 +17,16 @@ public class CommodityCategoryMongo {
 	MongoOperations mongoOps;
 
 	public void save(CommodityCategory commodityCategory) {
-		if (commodityCategory!=null&&queryCommodityCategoryByCid(commodityCategory.getCid())==null) {
+		if (commodityCategory != null
+				&& queryCommodityCategoryByCid(commodityCategory.getCid()) == null) {
 			mongoOps.save(commodityCategory);
 		}
-		
+
 	}
 
 	public CommodityCategory queryCommodityCategoryByCid(long cid) {
 		return mongoOps.findOne(query(where("cid").is(cid)),
 				CommodityCategory.class);
 	}
-
 
 }

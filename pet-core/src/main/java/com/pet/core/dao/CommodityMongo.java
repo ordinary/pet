@@ -7,6 +7,8 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.mongodb.core.MongoOperations;
 import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.stereotype.Component;
@@ -30,6 +32,10 @@ public class CommodityMongo {
 	public List<Commodity> queryCommodityByCid(long cid) {
 		return mongoOps.find(query(where("cid").is(cid)), Commodity.class);
 	}
+	
+	public List<Commodity> queryCommodityByNumIidOrderbyNumIid(int start,int count) {
+		return mongoOps.find(query(where("numIid").gt(0)).with(new PageRequest(start,count,new Sort("numIid"))), Commodity.class);
+	}
 
 	public Commodity queryCommodityAndModify(long numIid, Commodity commodity) {
 		if (commodity != null) {
@@ -48,10 +54,8 @@ public class CommodityMongo {
 									commodity.getSellerCreditScore())
 							.set("volume", commodity.getVolume()),
 					Commodity.class);
-		} else {
-			return mongoOps.findOne(query(where("numIid").is(numIid)),
-					Commodity.class);
 		}
+		return null;
 
 	}
 

@@ -17,6 +17,7 @@ public class CommentMongo {
 	
 	@Resource(name="petMongoTemplate")
 	MongoOperations mongoOps;
+
 	
 	public void save(Comment comment){
 		if (comment!=null&&queryByCommodityRateId(comment.getRateId())==null) {

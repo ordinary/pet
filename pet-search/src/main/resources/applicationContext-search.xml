@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://code.alibabatech.com/schema/dubbo
+        http://code.alibabatech.com/schema/dubbo/dubbo.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+	<context:component-scan base-package="com.pet.search"></context:component-scan>
+	<bean id="commodityIndexingSystem" class="proj.zoie.impl.indexing.ZoieSystem"
+		init-method="start" destroy-method="shutdown">
+		<!-- disk index directory 索引文件夹 -->
+		<constructor-arg index="0" value="/data/pet/commodity/" />
+		<!-- sets the interpreter 设置翻译器 -->
+		<constructor-arg index="1" ref="commodityIndexableInterpreter" />
+		<!-- sets the decorator 设置装饰器 -->
+		<constructor-arg index="2" ref="basicIndexReaderDecorator" />
+		<!-- set the Analyzer, if null is passed, Lucene's StandardAnalyzer is 
+			used 设置分词器，如果为null，则使用默认的Lucene的StandardAnalyzer -->
+		<constructor-arg index="3"   ref="complexAnalyzer"/>
+		<!-- sets the Similarity, if null is passed, Lucene's DefaultSimilarity 
+			is used 设置相似性评分器，如果为null，则使用Lucene默认的DefaultSimilarity -->
+		<constructor-arg index="4" ref="subjectSimilarity" />
+		<constructor-arg index="5" value="1000" />
+		<constructor-arg index="6" value="300000" />
+		<constructor-arg index="7" value="true" />
+		<constructor-arg index="8" ref="zoieComparator" />
+		<constructor-arg index="9" value="false" />
+	</bean>
+	
+	<bean id="knowledgeIndexingSystem" class="proj.zoie.impl.indexing.ZoieSystem"
+		init-method="start" destroy-method="shutdown">
+		<!-- disk index directory 索引文件夹 -->
+		<constructor-arg index="0" value="/data/pet/knowledge/" />
+		<!-- sets the interpreter 设置翻译器 -->
+		<constructor-arg index="1" ref="knowledgeIndexableInterpreter" />
+		<!-- sets the decorator 设置装饰器 -->
+		<constructor-arg index="2" ref="basicIndexReaderDecorator" />
+		<!-- set the Analyzer, if null is passed, Lucene's StandardAnalyzer is 
+			used 设置分词器，如果为null，则使用默认的Lucene的StandardAnalyzer -->
+		<constructor-arg index="3"   ref="complexAnalyzer"/>
+		<!-- sets the Similarity, if null is passed, Lucene's DefaultSimilarity 
+			is used 设置相似性评分器，如果为null，则使用Lucene默认的DefaultSimilarity -->
+		<constructor-arg index="4"  ><null/> </constructor-arg>
+		<constructor-arg index="5" value="1000" />
+		<constructor-arg index="6" value="300000" />
+		<constructor-arg index="7" value="true" />
+		<constructor-arg index="8" ref="zoieComparator" />
+		<constructor-arg index="9" value="false" />
+	</bean>
+
+	<bean id="complexAnalyzer" class="com.chenlb.mmseg4j.analysis.ComplexAnalyzer" /> 
+
+	<bean id="commodityDataProvider" class="com.pet.search.dataProvider.CommodityDataProvider" init-method="start" destroy-method="stop">
+		<property name="dataConsumer" ref="commodityIndexingSystem" />
+	</bean>
+	
+	<bean id="knowledgeDataProvider" class="com.pet.search.dataProvider.KnowledgeDataProvider" init-method="start" destroy-method="stop">
+		<property name="dataConsumer" ref="knowledgeIndexingSystem" />
+	</bean>
+
+	<!-- Application name -->
+	<dubbo:application name="pet-app" />
+
+	<!-- registry address, used for service to register itself -->
+	<dubbo:registry address="zookeeper://zookeeperServer:2181" />
+
+	<!-- expose this service through dubbo protocol, through port 20880 -->
+	<dubbo:protocol name="dubbo" port="20880" />
+
+	<!-- which service interface do we expose? -->
+	<dubbo:service interface="com.pet.service.ISearcher" ref="searcherService" />
+
+
+</beans>
