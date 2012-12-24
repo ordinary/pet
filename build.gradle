@@ -316,8 +316,6 @@ project(':pet-search') {
        compile "sslext:sslext:1.10-4"
 
        compile "com.linkedin.zoie:zoie-core:3.3.0"
-       
-       compile "com.pet:mmseg4j:1.8.5"
     
        compile "org.apache.thrift:libthrift:0.9.0"
 
