@@ -22,7 +22,7 @@
 		<property name="initialPoolSize" value="30" />
 	</bean>
 
-	<mongo:mongo host="192.168.1.125" port="27017">
+	<mongo:mongo host="mogodServer" port="27017">
 		<mongo:options connections-per-host="8"
 			threads-allowed-to-block-for-connection-multiplier="4"
 			connect-timeout="1000" max-wait-time="1500" auto-connect-retry="true"
