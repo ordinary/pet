@@ -10,5 +10,5 @@ repositories {
     mavenCentral()
 }
 dependencies {
-    compile "net.pet:pet-core:1.2-SNAPSHOT"
+    compile project(':pet-core')
 }

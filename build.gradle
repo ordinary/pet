@@ -167,7 +167,6 @@ project(':rose-jade') {
         testCompile "org.hsqldb:hsqldb:2.2.8"
 
     }
-
 }
 
 
@@ -187,15 +186,12 @@ project(':rose-pipe') {
         compile "com.metaparadigm:json-rpc:1.0"
 
     }
-
 }
-
-
-
-
 
 project(':pet-core') {
     dependencies {
+
+       compile project(':datasource4jade')
 
        compile project(':rose-context')
 
@@ -215,14 +211,15 @@ project(':pet-core') {
        
        compile "com.github.sgroschupf:zkclient:0.1"
 
-       compile "mysql:mysql-connector-java:5.1.16"
+       compile "mysql:mysql-connector-java:5.1.13"
+       
+       compile "commons-dbcp:commons-dbcp:1.4"
 
        testCompile "junit:junit:4.7"
 
     }
 
 }
-
 
 
 
@@ -248,45 +245,6 @@ project(':pet-fetch') {
       }
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-project(':pet-web') {
-
-     dependencies {
-     
-       compile project(':pet-core')
-
-       compile project(':rose')
-
-       compile project(':rose-context')
-
-       compile project(':rose-jade')
-
-       compile "sslext:sslext:1.10-4"
- 
-   }
-
-}
-
-
-
 
 
 project(':pet-search') {
@@ -330,11 +288,33 @@ project(':pet-search-client') {
 }
 
 
+project(':datasource4jade') {
+    dependencies {
+       compile project(':rose-context')
 
+       compile project(':rose')
 
+       compile project(':rose-jade')
+       
+       compile "commons-collections:commons-collections:3.2.1"
 
+       compile "org.springframework:spring-context:3.1.2.RELEASE"
 
-
+       compile "org.springframework:spring-jdbc:3.1.2.RELEASE"
+       
+       compile "org.springframework:spring-test:3.1.2.RELEASE"
+       
+       compile "mysql:mysql-connector-java:5.1.13"
+       
+       compile "commons-jexl:commons-jexl:1.1"
+               
+       compile "commons-collections:commons-collections:2.0"
+       
+       compile "commons-dbcp:commons-dbcp:1.4"
+       
+       compile "dom4j:dom4j:1.6.1"
+     }
+}
 
 
 

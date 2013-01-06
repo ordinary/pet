@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<configs>
+	<item id="db_notfound" type="mysql">
+		<server type="mysql" database="jingwei" host="127.0.0.1"
+			port="3306" user="jingwei" password="123456" wrflag="w"
+			initialSize="1" maxActive="20" maxWait="10000" />
+		<server type="mysql" database="jingwei" host="127.0.0.1"
+			port="3306" user="jingwei" password="123456" wrflag="r"
+			initialSize="1" maxActive="20" maxWait="10000" />
+	</item>
+	
+	<item id="jingwei" type="mysql">
+		<server type="mysql" database="jingwei" host="127.0.0.1"
+			port="3306" user="jingwei" password="123456" wrflag="w"
+			initialSize="1" maxActive="20" maxWait="10000" />
+		<server type="mysql" database="jingwei" host="127.0.0.1"
+			port="3306" user="jingwei" password="123456" wrflag="r"
+			initialSize="1" maxActive="20" maxWait="10000" />
+	</item>
+	<!-- 
+	<table-partitions>
+		<table database="msg" tableName="inbox" by-column="receiver"
+			partitions="100" target-pattern="inbox_{0}" />
+	</table-partitions>
+	 -->
+</configs>

@@ -5,7 +5,7 @@ import net.paoding.rose.jade.annotation.SQL;
 
 import com.pet.core.domain.CommodityCategory;
 
-@DAO
+@DAO(catalog="pet")
 public interface CommodityCategoryDAO {
 
 	String INSERT_SQL = "cid ,name,is_parent  ,parent_id ";

@@ -6,7 +6,7 @@ import net.paoding.rose.jade.annotation.DAO;
 import net.paoding.rose.jade.annotation.SQL;
 
 import com.pet.core.domain.Comment;
-@DAO
+@DAO(catalog="pet")
 public interface CommentDAO {
 	
 	

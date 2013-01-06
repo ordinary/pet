@@ -7,7 +7,7 @@ import net.paoding.rose.jade.annotation.SQL;
 
 import com.pet.core.domain.Commodity;
 
-@DAO
+@DAO(catalog="pet")
 public interface CommodityDAO {
 
 	String INSERT_SQL = "cid ,commission ,commission_num ," +
