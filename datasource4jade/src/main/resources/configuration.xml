@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <configs>
-	<item id="db_notfound" type="mysql">
+	<item id="notfound" type="mysql">
 		<server type="mysql" database="pet" host="192.168.1.125"
 			port="3306" user="root" password="271828" wrflag="w"
 			initialSize="1" maxActive="20" maxWait="10000" />

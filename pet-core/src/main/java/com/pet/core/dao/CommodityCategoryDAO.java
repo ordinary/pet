@@ -17,7 +17,7 @@ public interface CommodityCategoryDAO {
 	
 	
 	@SQL("insert into " + TABLE +"(" +INSERT_SQL +" ) values (:1.cid,:1.name,:1.isParent" +
-    		",:1.parentId")
+    		",:1.parentId )")
 	public int save(CommodityCategory commodityCategory);
 	
 

@@ -17,7 +17,7 @@ public interface CommentDAO {
 	String TABLE = " comment ";
 	
 	@SQL("insert into " + TABLE +"(" +INSERT_SQL +" ) values (:1.commodityId,:1.annoy,:1.buyerName" +
-    		",:1.credit,:1.date,:1.deal,:1.rateId,:1.text,:1.type")
+    		",:1.credit,:1.date,:1.deal,:1.rateId,:1.text,:1.type )")
 	public int save(Comment comment);
 	
     @SQL("select " +SELECT_SQL + " from " +TABLE +"where commodity_id =:1" )

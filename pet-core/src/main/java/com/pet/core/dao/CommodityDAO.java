@@ -10,7 +10,7 @@ import com.pet.core.domain.Commodity;
 @DAO(catalog="pet")
 public interface CommodityDAO {
 
-	String INSERT_SQL = "cid ,commission ,commission_num ," +
+	String INSERT_SQL = "cid ,click_url,commission ,commission_num ," +
 			" commission_rate,commission_volume ,coupon_end_time ,coupon_price ,coupon_rate ," +
 			"coupon_start_time ,item_location ,keyword_click_url,nick ,num_iid,pic_url ," +
 			"price ,seller_credit_score ,seller_id ,shop_click_url ,shop_type ,taobaoke_cat_click_url ," +
@@ -18,13 +18,13 @@ public interface CommodityDAO {
 	
 	String SELECT_SQL = "id ,"+INSERT_SQL;
 
-	String TABLE = " commodity_category ";
+	String TABLE = " commodity ";
 	
 	@SQL("insert into " + TABLE +"(" +INSERT_SQL +" ) values (:1.cid,:1.clickUrl,:1.commission" +
     		",:1.commissionNum,:1.commissionRate,:1.commissionVolume,:1.couponEndTime,:1.couponPrice" +
     		",:1.couponRate,:1.couponStartTime,:1.itemLocation,:1.keywordClickUrl,:1.nick" +
     		",:1.numIid,:1.picUrl,:1.price,:1.sellerCreditScore,:1.sellerId" +
-    		",:1.shopClickUrl,:1.shopType,:1.taobaokeCatClickUrl,:1.title,:1.volume")
+    		",:1.shopClickUrl,:1.shopType,:1.taobaokeCatClickUrl,:1.title,:1.volume )")
 	public int save(Commodity commodity);
 	
 	   

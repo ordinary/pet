@@ -13,7 +13,7 @@ public class CommodityCategory {
 	
 	private String name;
 
-	private boolean isParent;
+	private int isParent;
 
 	private long parentId;
 
@@ -23,14 +23,6 @@ public class CommodityCategory {
 
 	public void setName(String name) {
 		this.name = name;
-	}
-
-	public boolean isParent() {
-		return isParent;
-	}
-
-	public void setParent(boolean isParent) {
-		this.isParent = isParent;
 	}
 
 	public long getParentId() {
@@ -55,6 +47,14 @@ public class CommodityCategory {
 
 	public void setId(long id) {
 		this.id = id;
+	}
+
+	public int getIsParent() {
+		return isParent;
+	}
+
+	public void setIsParent(int isParent) {
+		this.isParent = isParent;
 	}
 
 }

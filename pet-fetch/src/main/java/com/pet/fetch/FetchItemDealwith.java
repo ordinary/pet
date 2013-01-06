@@ -30,7 +30,7 @@ public class FetchItemDealwith {
 			CommodityCategory commodityCategory = new CommodityCategory();
 			commodityCategory.setCid(itemCat.getCid());
 			commodityCategory.setName(itemCat.getName());
-			commodityCategory.setParent(itemCat.getIsParent());
+			commodityCategory.setIsParent(itemCat.getIsParent()?1:0);
 			commodityCategory.setParentId(itemCat.getParentCid());
 			if (commodityCategoryDao.queryByCid(itemCat.getCid()) == null) {
 				commodityCategoryDao.save(commodityCategory);
