@@ -2,42 +2,23 @@ package com.pet.core.domain;
 
 import java.util.Date;
 
-import org.bson.types.ObjectId;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.index.Indexed;
-import org.springframework.data.mongodb.core.mapping.Document;
-import org.springframework.data.mongodb.core.mapping.Field;
-
-@Document(collection="Commodity_detail")
 public class CommodityDetail {
 	
-	@Id
-	private ObjectId id;
-
-	public ObjectId getId() {
-		return id;
-	}
-
-	public void setId(ObjectId id) {
-		this.id = id;
-	}
+   private long id;
 
 	/**
 	 * 售后服务ID,该字段仅在taobao.item.get接口中返回
 	 */
-	@Field("after_sale_id")
 	private Long afterSaleId;
 
 	/**
 	 * 商品上传后的状态。onsale出售中，instock库中
 	 */
-	@Field("approve_status")
 	private String approveStatus;
 
 	/**
 	 * 商城返点比例，为5的倍数，最低0.5%
 	 */
-	@Field("auction_point")
 	private Long auctionPoint;
 
 	/**
@@ -45,92 +26,77 @@ public class CommodityDetail {
 	 * 在代充商品的类目下，不传表示不标记商品类型（交易搜索中就不能通过标记搜到相关的交易了）。可选类型： time_card(点卡软件代充)
 	 * fee_card(话费软件代充)
 	 */
-	@Field("auto_fill")
 	private String autoFill;
 
 	/**
 	 * 商品所属的叶子类目 id
 	 */
-	@Field("cid")
 	private Long cid;
 
 
 	/**
 	 * Item的发布时间，目前仅供taobao.item.add和taobao.item.get可用
 	 */
-	@Field("created")
 	private Date created;
 
 	/**
 	 * 下架时间（格式：yyyy-MM-dd HH:mm:ss）
 	 */
-	@Field("delist_time")
 	private Date delistTime;
 
 	/**
 	 * 商品描述, 字数要大于5个字符，小于25000个字符
 	 */
-	@Field("desc")
 	private String desc;
 
 	/**
 	 * 商品url
 	 */
-	@Field("detail_url")
 	private String detailUrl;
 
 	/**
 	 * ems费用,格式：5.00；单位：元；精确到：分
 	 */
-	@Field("ems_fee")
 	private String emsFee;
 
 	/**
 	 * 快递费用,格式：5.00；单位：元；精确到：分
 	 */
-	@Field("express_fee")
 	private String expressFee;
 
 	/**
 	 * 宝贝特征值， 只有在Top支持的特征值才能保存到宝贝上
 	 */
-	@Field("features")
 	private String features;
 
 	/**
 	 * 运费承担方式,seller（卖家承担），buyer(买家承担）
 	 */
-	@Field("freight_payer")
 	private String freightPayer;
 
 	/**
 	 * 针对全球购卖家的库存类型业务，有两种库存类型：现货和代购; 参数值为1时代表现货，值为2时代表代购
 	 */
-	@Field("global_stock_type")
 	private String globalStockType;
 
 	/**
 	 * 支持会员打折,true/false
 	 */
-	@Field("has_discount")
 	private Boolean hasDiscount;
 
 	/**
 	 * 是否有发票,true/false
 	 */
-	@Field("has_invoice")
 	private Boolean hasInvoice;
 
 	/**
 	 * 橱窗推荐,true/false
 	 */
-	@Field("has_showcase")
 	private Boolean hasShowcase;
 
 	/**
 	 * 是否有保修,true/false
 	 */
-	@Field("has_warranty")
 	private Boolean hasWarranty;
 
 	/**
@@ -142,14 +108,12 @@ public class CommodityDetail {
 	 * ）、101-200（5 ）、201-500
 	 * （10）、501-1001（15）、001-2000（25）、2001-5000（50）、5001-10000（100） 10001以上 200
 	 */
-	@Field("increment")
 	private String increment;
 
 	/**
 	 * 用户自行输入的类目属性ID串。结构："pid1,pid2,pid3"，如："20000"（表示品牌）
 	 * 注：通常一个类目下用户可输入的关键属性不超过1个。
 	 */
-	@Field("input_pids")
 	private String inputPids;
 
 	/**
@@ -157,137 +121,114 @@ public class CommodityDetail {
 	 * 科比系列;科比系列;2K5”，input_str需要与input_pids一一对应，注：通常一个类目下用户可输入的关键属性不超过1个。
 	 * 所有属性别名加起来不能超过 3999字节。
 	 */
-	@Field("input_str")
 	private String inputStr;
 
 	/**
 	 * 是否是3D淘宝的商品
 	 */
-	@Field("is_3D")
 	private Boolean is3D;
 
 	/**
 	 * 是否在外部网店显示
 	 */
-	@Field("is_ex")
 	private Boolean isEx;
 
 	/**
 	 * 非分销商品：0，代销：1，经销：2
 	 */
-	@Field("is_fenxiao")
 	private Long isFenxiao;
 
 	/**
 	 * 是否24小时闪电发货
 	 */
-	@Field("is_lightning_consignment")
 	private Boolean isLightningConsignment;
 
 	/**
 	 * 商品是否为先行赔付 taobao.items.search和taobao.items.vip.search专用
 	 */
-	@Field("is_prepay")
 	private Boolean isPrepay;
 
 	/**
 	 * 是否在淘宝显示
 	 */
-	@Field("is_taobao")
 	private Boolean isTaobao;
 
 	/**
 	 * 是否定时上架商品
 	 */
-	@Field("is_timing")
 	private Boolean isTiming;
 
 	/**
 	 * 虚拟商品的状态字段
 	 */
-	@Field("is_virtual")
 	private Boolean isVirtual;
 
 	/**
 	 * 标示商品是否为新品。 值含义：true-是，false-否。
 	 */
-	@Field("is_xinpin")
 	private Boolean isXinpin;
 
 	/**
 	 * 上架时间（格式：yyyy-MM-dd HH:mm:ss）
 	 */
-	@Field("list_time")
 	private Date listTime;
 
 	/**
 	 * 商品修改时间（格式：yyyy-MM-dd HH:mm:ss）
 	 */
-	@Field("modified")
 	private Date modified;
 
 	/**
 	 * 卖家昵称
 	 */
-	@Field("nick")
 	private String nick;
 
 	/**
 	 * 商品数量
 	 */
-	@Field("num")
 	private Long num;
 
 	/**
 	 * 商品数字id
 	 */
-	@Id
-	@Indexed(unique=true)
 	private Long numIid;
 
 	/**
 	 * 是否淘1站商品
 	 */
-	@Field("one_station")
 	private Boolean oneStation;
 
 	/**
 	 * 商家外部编码(可与商家外部系统对接)
 	 */
-	@Field("outer_id")
 	private String outerId;
 
 
 	/**
 	 * 商品主图片地址
 	 */
-	@Field("pic_url")
 	private String picUrl;
 
 	/**
 	 * 平邮费用,格式：5.00；单位：元；精确到：分
 	 */
-	@Field("post_fee")
 	private String postFee;
 
 
 	/**
 	 * 商品价格，格式：5.00；单位：元；精确到：分
 	 */
-	@Field("price")
 	private String price;
 
 	/**
 	 * 宝贝所属产品的id(可能为空). 该字段可以通过taobao.products.search 得到
 	 */
-	@Field("product_id")
 	private Long productId;
 
 	/**
 	 * 消保类型，多个类型以,分割。可取以下值：
 	 * 2：假一赔三；4：7天无理由退换货；taobao.items.search和taobao.items.vip.search专用
 	 */
-	@Field("promoted_service")
 	private String promotedService;
 
 	
@@ -295,13 +236,11 @@ public class CommodityDetail {
 	/**
 	 * 属性值别名,比如颜色的自定义名称
 	 */
-	@Field("property_alias")
 	private String propertyAlias;
 
 	/**
 	 * 商品属性 格式：pid:vid;pid:vid
 	 */
-	@Field("props")
 	private String props;
 
 	/**
@@ -309,14 +248,12 @@ public class CommodityDetail {
 	 * vid2:pid_name2:vid_name2……(<strong>注：</strong><font
 	 * color="red">属性名称中的冒号":"被转换为："#cln#"; 分号";"被转换为："#scln#" </font>)
 	 */
-	@Field("props_name")
 	private String propsName;
 
 	/**
 	 * 商品所属卖家的信用等级数，1表示1心，2表示2心……，只有调用商品搜索:taobao.items.get和taobao.items.
 	 * search的时候才能返回
 	 */
-	@Field("score")
 	private Long score;
 
 	/**
@@ -324,25 +261,21 @@ public class CommodityDetail {
 	 * 如果秒杀结束需要自由编辑请联系活动负责人（小二）去掉秒杀标记。可选类型 web_only(只能通过web网络秒杀)
 	 * wap_only(只能通过wap网络秒杀) web_and_wap(既能通过web秒杀也能通过wap秒杀)
 	 */	
-	@Field("second_kill")
 	private String secondKill;
 
 	/**
 	 * 是否承诺退换货服务!
 	 */
-	@Field("sell_promise")
 	private Boolean sellPromise;
 
 	/**
 	 * 商品所属的店铺内卖家自定义类目列表
 	 */
-	@Field("seller_cids")
 	private String sellerCids;
 
 	/**
 	 * 商品新旧程度(全新:new，闲置:unused，二手：second)
 	 */
-	@Field("stuff_status")
 	private String stuffStatus;
 
 
@@ -350,37 +283,31 @@ public class CommodityDetail {
 	/**
 	 * 商品标题,不能超过60字节
 	 */
-	@Field("title")
 	private String title;
 
 	/**
 	 * 商品类型(fixed:一口价;auction:拍卖)注：取消团购
 	 */
-	@Field("type")
 	private String type;
 
 	/**
 	 * 有效期,7或者14（默认是14天）
 	 */
-	@Field("valid_thru")
 	private Long validThru;
 
 	/**
 	 * 商品是否违规，违规：true , 不违规：false
 	 */
-	@Field("violation")
 	private Boolean violation;
 
 	/**
 	 * 对应搜索商品列表页的最近成交量,只有调用商品搜索:taobao.items.get和taobao.items.search的时候才能返回
 	 */
-	@Field("volume")
 	private Long volume;
 
 	/**
 	 * 不带html标签的desc文本信息，该字段只在taobao.item.get接口中返回
 	 */
-	@Field("wap_desc")
 	private String wapDesc;
 
 	public Long getAfterSaleId() {
@@ -830,6 +757,14 @@ public class CommodityDetail {
 
 	public void setWapDesc(String wapDesc) {
 		this.wapDesc = wapDesc;
+	}
+
+	public long getId() {
+		return id;
+	}
+
+	public void setId(long id) {
+		this.id = id;
 	}
 
 }

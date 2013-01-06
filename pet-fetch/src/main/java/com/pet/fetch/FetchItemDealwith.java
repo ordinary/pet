@@ -5,9 +5,9 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.pet.core.dao.CommentMongo;
-import com.pet.core.dao.CommodityCategoryMongo;
-import com.pet.core.dao.CommodityMongo;
+import com.pet.core.dao.CommentDAO;
+import com.pet.core.dao.CommodityCategoryDAO;
+import com.pet.core.dao.CommodityDAO;
 import com.pet.core.domain.Comment;
 import com.pet.core.domain.Commodity;
 import com.pet.core.domain.CommodityCategory;
@@ -15,18 +15,15 @@ import com.taobao.api.domain.ItemCat;
 import com.taobao.api.domain.TaobaokeItem;
 
 @Component
-public class FetchItemDealwith{
+public class FetchItemDealwith {
+	@Autowired
+	private CommodityDAO commodityDao;
 
 	@Autowired
-	private CommodityCategoryMongo commodityCategoryMongo;
+	private CommodityCategoryDAO commodityCategoryDao;
 
 	@Autowired
-	private CommodityMongo commodityMongo;
-	
-	@Autowired
-	private CommentMongo commentMongo;
-
-	
+	private CommentDAO commentDAO;
 
 	public void execute(ItemCat itemCat) {
 		if (itemCat != null) {
@@ -35,7 +32,10 @@ public class FetchItemDealwith{
 			commodityCategory.setName(itemCat.getName());
 			commodityCategory.setParent(itemCat.getIsParent());
 			commodityCategory.setParentId(itemCat.getParentCid());
-			commodityCategoryMongo.save(commodityCategory);
+			if (commodityCategoryDao.queryByCid(itemCat.getCid()) == null) {
+				commodityCategoryDao.save(commodityCategory);
+			}
+
 			if (!itemCat.getIsParent()) {
 				List<TaobaokeItem> taobaokeItems = PetClient.getInstance()
 						.getTaobaokeItems(itemCat.getCid());
@@ -70,11 +70,17 @@ public class FetchItemDealwith{
 							.getTaobaokeCatClickUrl());
 					commodity.setTitle(taobaokeItem.getTitle());
 					commodity.setVolume(taobaokeItem.getVolume());
-					commodityMongo.save(commodity);
-					List<Comment> comments =PetClient.getInstance().getComment(taobaokeItem.getNumIid(), 1);
-					if (comments!=null) {
+					if (commodityDao.queryByNumIid(taobaokeItem.getNumIid()) == null) {
+						commodityDao.save(commodity);
+					}
+					List<Comment> comments = PetClient.getInstance()
+							.getComment(taobaokeItem.getNumIid(), 1);
+					if (comments != null) {
 						for (Comment comment : comments) {
-							commentMongo.save(comment);
+							if (commentDAO.queryByRateId(comment.getRateId()) == null) {
+								commentDAO.save(comment);
+							}
+
 						}
 					}
 					try {

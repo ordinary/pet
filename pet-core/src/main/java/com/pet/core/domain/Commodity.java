@@ -1,158 +1,122 @@
 package com.pet.core.domain;
 
-import org.bson.types.ObjectId;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
-import org.springframework.data.mongodb.core.mapping.Field;
 
 
 @Document(collection="commodity")
 public class Commodity {
 	
-	@Id
-	private ObjectId id;
-	
-
-	public void setId(ObjectId id) {
-		this.id = id;
-	}
-
+	private long id;
 	/**类别id*/
-	
-	@Field("cid")
 	private long cid;
 	/**
 	 * 推广点击url
 	 */
-	@Field("click_url")
 	private String clickUrl;
 
 	/**
 	 * 淘宝客佣金
 	 */
-	@Field("commission")
 	private String commission;
 
 	/**
 	 * 累计成交量.注：返回的数据是30天内累计推广量
 	 */
-	@Field("commission_num")
 	private String commissionNum;
 
 	/**
 	 * 淘宝客佣金比率，比如：1234.00代表12.34%
 	 */
-	@Field("commission_rate")
 	private String commissionRate;
 
 	/**
 	 * 累计总支出佣金量
 	 */
-	@Field("commission_volume")
 	private String commissionVolume;
 
 	/**
 	 * 折扣活动结束时间
 	 */
-	@Field("coupon_end_time")
 	private String couponEndTime;
 
 	/**
 	 * 折扣价格
 	 */
-	@Field("coupon_price")
 	private String couponPrice;
 
 	/**
 	 * 折扣比率
 	 */
-	@Field("coupon_rate")
 	private String couponRate;
 
 	/**
 	 * 折扣活动开始时间
 	 */
-	@Field("coupon_start_time")
 	private String couponStartTime;
 
 	/**
 	 * 商品所在地
 	 */
-	@Field("item_location")
 	private String itemLocation;
 
 	/**
 	 * 淘宝客关键词搜索URL
 	 */
-	@Field("keyword_click_url")
 	private String keywordClickUrl;
 
 	/**
 	 * 卖家昵称
 	 */
-	@Field("nick")
 	private String nick;
 
 	/**
 	 * 淘宝客商品数字id
 	 */
-	@Field("numIid")
-	@Indexed(unique=true)
 	private Long numIid;
 
 	/**
 	 * 图片url
 	 */
-	@Field("pic_url")
 	private String picUrl;
 
 	/**
 	 * 商品价格
 	 */
-	@Field("price")
 	private String price;
 
 	/**
 	 * 卖家信用等级
 	 */
-	@Field("seller_credit_score")
 	private Long sellerCreditScore;
 
 	/**
 	 * 卖家id
 	 */
-	@Field("seller_id")
 	private Long sellerId;
 
 	/**
 	 * 商品所在店铺的推广点击url
 	 */
-	@Field("shop_click_url")
 	private String shopClickUrl;
 
 	/**
 	 * 店铺类型:B(商城),C(集市)
 	 */
-	@Field("shop_type")
 	private String shopType;
 
 	/**
 	 * 淘宝客类目推广URL
 	 */
-	@Field("taobaoke_cat_click_url")
 	private String taobaokeCatClickUrl;
 
 	/**
 	 * 商品title 宝贝名称
 	 */
-	@Field("title")
 	private String title;
 
 	/**
 	 * 30天内交易量
 	 */
-	@Field("volume")
 	private Long volume;
 
 	public String getClickUrl() {
@@ -337,5 +301,13 @@ public class Commodity {
 
 	public void setCid(long cid) {
 		this.cid = cid;
+	}
+
+	public long getId() {
+		return id;
+	}
+
+	public void setId(long id) {
+		this.id = id;
 	}
 }

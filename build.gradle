@@ -270,6 +270,8 @@ project(':pet-fetch') {
 project(':pet-web') {
 
      dependencies {
+     
+       compile project(':pet-core')
 
        compile project(':rose')
 

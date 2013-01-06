@@ -1,28 +1,15 @@
 package com.pet.core.domain;
 
-import org.bson.types.ObjectId;
-import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
-import org.springframework.data.mongodb.core.mapping.Field;
 
 @Document(collection = "knowledge")
 public class Knowledge {
-	@Id
-	private ObjectId id;
+  
+	private long id;
 	
-	@Field("content")
 	private String content;
 	
-	@Field("url")
 	private String url;
-
-	public ObjectId getId() {
-		return id;
-	}
-
-	public void setId(ObjectId id) {
-		this.id = id;
-	}
 
 	public String getContent() {
 		return content;
@@ -38,6 +25,14 @@ public class Knowledge {
 
 	public void setUrl(String url) {
 		this.url = url;
+	}
+
+	public long getId() {
+		return id;
+	}
+
+	public void setId(long id) {
+		this.id = id;
 	}
 
 }

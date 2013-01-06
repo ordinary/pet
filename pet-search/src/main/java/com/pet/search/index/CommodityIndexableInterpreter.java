@@ -13,7 +13,7 @@ import org.springframework.stereotype.Component;
 import proj.zoie.api.indexing.ZoieIndexable;
 import proj.zoie.api.indexing.ZoieIndexableInterpreter;
 
-import com.pet.core.dao.CommodityMongo;
+import com.pet.core.dao.CommodityDAO;
 import com.pet.core.domain.Commodity;
 import com.pet.search.wrapper.CommodityWrapper;
 
@@ -22,23 +22,24 @@ public class CommodityIndexableInterpreter implements
 		ZoieIndexableInterpreter<CommodityWrapper> {
 
 	@Autowired
-	private CommodityMongo commodityMongo;
+	private CommodityDAO commodityDao;
 
 	@Override
 	public ZoieIndexable convertAndInterpret(CommodityWrapper commodityWrapper) {
-		return new CommodityIndexable(commodityWrapper,commodityMongo);
+		return new CommodityIndexable(commodityWrapper, commodityDao);
 	}
 
 }
 
 class CommodityIndexable implements ZoieIndexable {
 	private CommodityWrapper commodityWrapper;
-	
-	private CommodityMongo commodityMongo;
 
-	public CommodityIndexable(CommodityWrapper commodityWrapper , CommodityMongo commodityMongo) {
+	private CommodityDAO commodityDao;
+
+	public CommodityIndexable(CommodityWrapper commodityWrapper,
+			CommodityDAO commodityDao) {
 		this.commodityWrapper = commodityWrapper;
-		this.commodityMongo=commodityMongo;
+		this.commodityDao = commodityDao;
 	}
 
 	@Override
@@ -48,8 +49,7 @@ class CommodityIndexable implements ZoieIndexable {
 		Document doc = null;
 		List<IndexingReq> reqs = new ArrayList<IndexingReq>();
 		try {
-			Commodity commodity = commodityMongo.queryCommodityAndModify(
-					commodityId, null);
+			Commodity commodity = commodityDao.queryByNumIid(commodityId);
 			if (commodity != null) {
 				doc = new Document();
 				doc.add(new Field("orderNo", String.valueOf(commodityId),

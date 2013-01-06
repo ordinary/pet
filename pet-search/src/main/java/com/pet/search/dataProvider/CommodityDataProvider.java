@@ -9,7 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import proj.zoie.api.DataConsumer.DataEvent;
 import proj.zoie.impl.indexing.StreamDataProvider;
 
-import com.pet.core.dao.CommodityMongo;
+import com.pet.core.dao.CommodityDAO;
 import com.pet.core.domain.Commodity;
 import com.pet.search.wrapper.CommodityWrapper;
 
@@ -20,7 +20,7 @@ public class CommodityDataProvider extends StreamDataProvider<CommodityWrapper> 
 	private int start = 0;
 	
 	@Autowired
-	private CommodityMongo commodityMongo;
+	private CommodityDAO commodityDao;
 
 
 	public CommodityDataProvider() {
@@ -39,7 +39,7 @@ public class CommodityDataProvider extends StreamDataProvider<CommodityWrapper> 
 
 	@Override
 	public DataEvent<CommodityWrapper> next() {
-		List<Commodity> commodities =commodityMongo.queryCommodityByNumIidOrderbyNumIid(start, PER_NUMBER);
+		List<Commodity> commodities =commodityDao.queryCommodityByNumIidOrderbyNumIid(start, PER_NUMBER);
 		if (CollectionUtils.isEmpty(commodities)) {
 			for (Commodity commodity : commodities) {
 				CommodityWrapper data = new CommodityWrapper();

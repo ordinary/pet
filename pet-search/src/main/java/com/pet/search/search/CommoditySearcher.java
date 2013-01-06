@@ -21,7 +21,7 @@ import proj.zoie.api.ZoieIndexReader.SubReaderAccessor;
 import proj.zoie.api.ZoieIndexReader.SubReaderInfo;
 import proj.zoie.impl.indexing.ZoieSystem;
 
-import com.pet.core.dao.CommodityMongo;
+import com.pet.core.dao.CommodityDAO;
 import com.pet.core.domain.Commodity;
 import com.pet.domain.CommodityResult;
 import com.pet.search.reader.BasicIndexReader;
@@ -34,7 +34,7 @@ public class CommoditySearcher extends
 	private final static String FIELD = "name";
 
 	@Autowired
-	private CommodityMongo commodityMongo;
+	private CommodityDAO commodityDao;
 
 	@Resource(name = "commodityIndexingSystem")
 	public void setZoieSystem(
@@ -61,8 +61,7 @@ public class CommoditySearcher extends
 			if (innerReader instanceof ZoieIndexReader) {
 				long id = ((ZoieIndexReader) innerReader)
 						.getUID(readerInfo.subdocid);
-				Commodity commodity = commodityMongo.queryCommodityAndModify(
-						id, null);
+				Commodity commodity = commodityDao.queryByNumIid(id);
 				if (commodity != null) {
 					commodities.add(commodity);
 				}
