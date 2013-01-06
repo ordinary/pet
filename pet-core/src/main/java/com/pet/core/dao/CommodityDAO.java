@@ -2,15 +2,13 @@ package com.pet.core.dao;
 
 import java.util.List;
 
+import net.paoding.rose.jade.annotation.DAO;
 import net.paoding.rose.jade.annotation.SQL;
 
 import com.pet.core.domain.Commodity;
 
-
+@DAO
 public interface CommodityDAO {
-	
-	
-	
 
 	String INSERT_SQL = "cid ,commission ,commission_num ," +
 			" commission_rate,commission_volume ,coupon_end_time ,coupon_price ,coupon_rate ," +
