@@ -313,10 +313,15 @@ project(':datasource4jade') {
        compile "commons-dbcp:commons-dbcp:1.4"
        
        compile "dom4j:dom4j:1.6.1"
+       
+           
+       compile ("commons-logging:commons-logging:1.1"){
+          exclude module: 'com.sun.jdmk'
+          exclude module: 'com.sun.jmx'
+          exclude module: 'javax.jms'
+       }
      }
 }
-
-
 
 
 

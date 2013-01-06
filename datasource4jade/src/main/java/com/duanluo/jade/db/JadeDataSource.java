@@ -3,9 +3,11 @@ package com.duanluo.jade.db;
 import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.sql.SQLFeatureNotSupportedException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import java.util.logging.Logger;
 
 import javax.sql.DataSource;
 
@@ -61,6 +63,7 @@ public class JadeDataSource  implements DataSource {
 		getDataSource().setLogWriter(out);
 	}
 
+
 	public void setLoginTimeout(int seconds) throws SQLException {
 		getDataSource().setLoginTimeout(seconds);
 	}
@@ -69,13 +72,16 @@ public class JadeDataSource  implements DataSource {
 		return getDataSource().getLoginTimeout();
 	}
 
-    @Override
     public <T> T unwrap(Class<T> iface) throws SQLException {
-        // TODO Auto-generated method stub
         return null;
     }
     
     public boolean isWrapperFor(Class<?> arg0) throws SQLException {
         return false;
     }
+
+	public Logger getParentLogger() throws SQLFeatureNotSupportedException {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }
