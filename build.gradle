@@ -221,15 +221,6 @@ project(':pet-core') {
 
 }
 
-
-
-
-
-
-
-
-
-
 project(':pet-fetch') {
 
       dependencies {
@@ -281,13 +272,6 @@ project(':pet-search-core') {
      }
 }
 
-project(':pet-search-client') {
-    dependencies {
-       compile project(':pet-search-core')
-     }
-}
-
-
 project(':datasource4jade') {
     dependencies {
        compile project(':rose-context')
@@ -320,6 +304,46 @@ project(':datasource4jade') {
           exclude module: 'com.sun.jmx'
           exclude module: 'javax.jms'
        }
+     }
+}
+
+project(':pet-user') {
+
+    dependencies {
+    
+       compile project(':pet-core')
+       
+       compile project(':datasource4jade')
+
+       compile project(':rose-context')
+
+       compile project(':rose')
+
+       compile project(':rose-jade')
+       
+     }
+}
+
+project(':pet-passport') {
+
+    dependencies {
+    
+       compile project(':pet-core')
+       
+       compile project(':datasource4jade')
+
+       compile project(':rose-context')
+
+       compile project(':rose')
+
+       compile project(':rose-jade')
+       
+     }
+}
+
+project(':pet-statistics') {
+    dependencies {
+       compile project(':pet-core')
      }
 }
 

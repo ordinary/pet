@@ -2,13 +2,12 @@ package com.pet.search.service;
 
 import javax.annotation.Resource;
 
-import org.springframework.stereotype.Component;
-
+import com.alibaba.dubbo.config.annotation.Service;
 import com.pet.domain.CommodityResult;
 import com.pet.search.search.CommoditySearcher;
 import com.pet.service.ISearcher;
 
-@Component(value = "searcherService")
+@Service(version="1.0.0")
 public class SearcherService implements ISearcher {
 
 	@Resource(name = "commoditySearcher")

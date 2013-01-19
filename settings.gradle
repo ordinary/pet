@@ -1,1 +1,1 @@
-include "rose-context", "rose", "rose-jade", "rose-pipe","pet-core", "pet-fetch","pet-web","pet-search","pet-search-core","pet-search-client","datasource4jade"
+include "rose-context", "rose", "rose-jade", "rose-pipe","pet-core", "pet-fetch","pet-web","pet-search","pet-search-core","datasource4jade","pet-user","pet-statistics","pet-passport"

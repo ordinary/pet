@@ -11,4 +11,5 @@ repositories {
 }
 dependencies {
     compile project(':pet-core')
+    compile project(':pet-search-core')
 }

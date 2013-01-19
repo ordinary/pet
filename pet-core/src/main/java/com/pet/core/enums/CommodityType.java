@@ -1,6 +1,8 @@
 package com.pet.core.enums;
 
 public enum CommodityType {
+	
+	NONE(0,""),
 
 	DOG(217309, "狗狗"),
 
@@ -41,6 +43,16 @@ public enum CommodityType {
 	private long id;
 
 	private String name;
+	
+	
+	public static CommodityType getCommodityTypeById(int id) {
+		for (CommodityType hotCommodityType : CommodityType.values()) {
+			if (hotCommodityType.getId()==id) {
+				return hotCommodityType;
+			}
+		}
+		return NONE;
+	}
 
 	CommodityType(long id, String name) {
 		this.id = id;
