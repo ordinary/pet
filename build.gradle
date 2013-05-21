@@ -19,17 +19,6 @@ subprojects {
     
 
     repositories {
-
-        maven {
-            credentials {
-               username 'admin'
-               password 'admin123'
-            }
-            url "http://192.168.1.125:8081/nexus/content/groups/public/"
-        }
-
-        mavenLocal()
-
         mavenCentral()
 
     }
@@ -44,21 +33,6 @@ subprojects {
 
  
 
-
-    uploadArchives { 
-       repositories.mavenDeployer {
-          name = 'pet' // optional
-          repository(url: "http://192.168.1.125:8081/nexus/content/repositories/snapshots") {
-             authentication(userName: "admin", password: "admin123")
-          }
-          
-        }
-    
-        repositories {
-        flatDir {
-           dirs 'repos'
-        } }    
-   }
 
     dependencies {
 
@@ -226,8 +200,6 @@ project(':pet-fetch') {
       dependencies {
 
         compile project(':pet-core')
-
-        compile "com.taobao:api:1.0"
         
         compile "com.alibaba:dubbo:2.5.3"
 

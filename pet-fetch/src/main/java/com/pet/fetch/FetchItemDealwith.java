@@ -30,7 +30,7 @@ public class FetchItemDealwith {
 			CommodityCategory commodityCategory = new CommodityCategory();
 			commodityCategory.setCid(itemCat.getCid());
 			commodityCategory.setName(itemCat.getName());
-			commodityCategory.setIsParent(itemCat.getIsParent()?1:0);
+			commodityCategory.setIsParent(itemCat.getIsParent() ? 1 : 0);
 			commodityCategory.setParentId(itemCat.getParentCid());
 			if (commodityCategoryDao.queryByCid(itemCat.getCid()) == null) {
 				commodityCategoryDao.save(commodityCategory);
@@ -39,6 +39,9 @@ public class FetchItemDealwith {
 			if (!itemCat.getIsParent()) {
 				List<TaobaokeItem> taobaokeItems = PetClient.getInstance()
 						.getTaobaokeItems(itemCat.getCid());
+				if (taobaokeItems == null) {
+					return;
+				}
 				for (TaobaokeItem taobaokeItem : taobaokeItems) {
 					Commodity commodity = new Commodity();
 					commodity.setCid(itemCat.getCid());

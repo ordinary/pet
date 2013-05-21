@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <configs>
 	<item id="notfound" type="mysql">
-		<server type="mysql" database="pet" host="192.168.1.125"
-			port="3306" user="root" password="271828" wrflag="w"
+		<server type="mysql" database="pet" host="127.0.0.1"
+			port="3306" user="root" password="65786591" wrflag="w"
 			initialSize="1" maxActive="20" maxWait="10000" />
-		<server type="mysql" database="pet" host="192.168.1.125"			port="3306" user="root" password="271828" wrflag="r"
+		<server type="mysql" database="pet" host="127.0.0.1"			port="3306" user="root" password="65786591" wrflag="r"
 			initialSize="1" maxActive="20" maxWait="10000" />
 	</item>
 	
 	<item id="pet" type="mysql">
-		<server type="mysql" database="pet" host="192.168.1.125"			port="3306" user="root" password="271828" wrflag="w"
+		<server type="mysql" database="pet" host="127.0.0.1"			port="3306" user="root" password="65786591" wrflag="w"
 			initialSize="1" maxActive="20" maxWait="10000" />
-		<server type="mysql" database="pet" host="192.168.1.125"			port="3306" user="root" password="271828" wrflag="r"
+		<server type="mysql" database="pet" host="127.0.0.1"			port="3306" user="root" password="65786591" wrflag="r"
 			initialSize="1" maxActive="20" maxWait="10000" />
 	</item>
 	<!-- 

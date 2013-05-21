@@ -1,0 +1,10 @@
+#org.springsource.ide.eclipse.gradle.core.preferences.GradleImportPreferences
+#Sun May 05 12:09:20 CST 2013
+addResourceFilters=true
+afterTasks=afterEclipseImport;
+beforeTasks=cleanEclipse;eclipse;
+enableAfterTasks=true
+enableBeforeTasks=true
+enableDSLD=false
+enableDependendencyManagement=true
+projects=;datasource4jade;pet-core;pet-fetch;pet-passport;pet-search;pet-search-core;pet-statistics;pet-user;pet-web;rose;rose-context;rose-jade;rose-pipe;

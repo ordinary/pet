@@ -18,6 +18,7 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.pet.core.domain.Comment;
 import com.taobao.api.ApiException;
+import com.taobao.api.Constants;
 import com.taobao.api.DefaultTaobaoClient;
 import com.taobao.api.TaobaoClient;
 import com.taobao.api.domain.ItemCat;
@@ -38,9 +39,9 @@ public class PetClient {
 
 	private static final String serverUrl = "http://gw.api.taobao.com/router/rest";
 
-	private static final String appKey = "21286988";
+	private static final String appKey = "21501927";
 
-	private static final String appSecret = "5c276c635348eb0b354d4d8ae954c860";
+	private static final String appSecret = "4b7d7dcfc1c216375ac48a97e706c1e1";
 
 	private static final String NICK = "tb46969797";
 
@@ -48,8 +49,8 @@ public class PetClient {
 
 	private static final String COMMENT_PATH = "/ajax/rate_list.do";
 
-	private static TaobaoClient client = new DefaultTaobaoClient(serverUrl,
-			appKey, appSecret, "json");
+	private static TaobaoClient client = new DefaultTaobaoClient(
+			serverUrl.trim(), appKey.trim(), appSecret.trim(), Constants.FORMAT_JSON);
 
 	private static PetClient petClient = new PetClient();
 
@@ -173,7 +174,7 @@ public class PetClient {
 							SimpleDateFormat sdf = new SimpleDateFormat(
 									"yyyy-MM-dd");
 							JSONObject objectVal = (JSONObject) object;
-							
+
 							Comment comment = new Comment();
 							comment.setCommodityId(itemId);
 							comment.setAnnoy(objectVal.getIntValue("annoy"));
@@ -202,7 +203,7 @@ public class PetClient {
 
 	public static void main(String[] args) {
 		for (TaobaokeItem taobaokeItem : PetClient.getInstance()
-				.getTaobaokeItems(29)) {
+				.getTaobaokeItems(50006121)) {
 			System.out.println(taobaokeItem.getClickUrl());
 			System.out.println(taobaokeItem.getPicUrl());
 			PetClient.getInstance().getComment(taobaokeItem.getNumIid(), 1);
